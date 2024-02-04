@@ -1,8 +1,11 @@
 import { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Image, TextInput, FlatList, Pressable } from 'react-native';
-import cartLogo from './assets/cart.png'
-import jcjLogo from './assets/JC_Jenson_Logo.png'
+import { StyleSheet, Text, View, Image, TextInput, FlatList, Pressable, Modal } from 'react-native';
+import Constants from 'expo-constants';
+import RemoveModal from './src/components/RemoveModal';
+import cartLogo from './assets/cart.png';
+import jcjLogo from './assets/JC_Jenson_Logo.png';
+import delLogo from './assets/trash.png';
 
 const DATA = [
   {
@@ -49,6 +52,13 @@ export default function App() {
   const [inputValue, setInputValue] = useState('');
   const [items, setItems] = useState(DATA);
   const [cartItems, setCartItems] = useState([]);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [itemSelected, setItemSelected] = useState(null);
+
+  const handleModal = (id) => {
+    setModalVisible(true);
+    setItemSelected(id);
+  };
 
   const addItem = () => {
     let maxId = 0;
@@ -64,6 +74,14 @@ export default function App() {
 
   return (
     <View style={styles.container}>
+      <StatusBar style="auto" />
+      <RemoveModal 
+        modalVisible={modalVisible}
+        items={items}
+        setItems = {setItems}
+        setModalVisible={setModalVisible}
+        itemSelected={itemSelected}
+      />
       <View style={styles.header}>
         <Image source={jcjLogo} /> 
         <Image style={{width: 50, height: 50}} source={cartLogo} /> 
@@ -80,13 +98,17 @@ export default function App() {
           data={items}
           renderItem={({ item }) => (
             <View style={styles.itemList}>
-              <Text style={styles.products}>{item.name}</Text>
+              <View style={styles.itemGroup}>
+                <Text style={styles.products}>{item.name}</Text>
+                <Pressable onPress={() => handleModal(item.id)}>
+                  <Image style={{width: 30, height: 30}} source={delLogo} /> 
+                </Pressable>
+              </View>
             </View>
           )}
           keyExtractor={item => item.id}
         />
       </View>
-      <StatusBar style="auto" />
     </View>
   );
 }
@@ -95,6 +117,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
+    paddingHorizontal: 14,
+    paddingTop: Constants.statusBarHeight
   },
   header: {
     flexDirection: 'row', 
@@ -118,5 +142,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20, 
     borderRadius: 5, 
     width: '90%'
+  },
+  itemGroup: {
+    flexDirection: 'row',
   }
 });
