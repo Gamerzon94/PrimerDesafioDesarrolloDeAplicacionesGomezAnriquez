@@ -3,12 +3,12 @@ import categories from "../data/categories.json";
 import CateogryItem from "./CategoryItem";
 import { colors } from '../global/colors';
 
-function Categories () {
+function Categories ({setCategorySelected}) {
     return (
         <View style={styles.container}>
             <FlatList
             data = {categories}
-            renderItem = {({item}) => (<CateogryItem category = {item}/>)}
+            renderItem = {({item}) => (<CateogryItem setCategorySelected= {setCategorySelected} category = {item}/>)}
             keyExtractor={(category) => category}
             />
         </View>

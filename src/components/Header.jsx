@@ -6,7 +6,7 @@ import { colors } from '../global/colors';
 function Header ({title}) {
     return (
         <View style={styles.header}>
-            <Text style = {{fontSize : 30}}>{title}</Text>
+            <Text style = {{fontSize : 20}}>{title}</Text>
             <Image source={jcjLogo} /> 
             <Image style={{width: 50, height: 50}} source={cartLogo} /> 
         </View>
