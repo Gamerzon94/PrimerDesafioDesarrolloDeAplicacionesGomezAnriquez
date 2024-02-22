@@ -6,7 +6,8 @@ import Search from "../components/Search";
 import { useEffect, useState } from "react";
 import { colors } from '../../src/global/colors';
 
-function ItemListCategories ({category, setCategorySelected, setProductDetailId}) {
+function ItemListCategories ({navigation, route}) {
+    const {category} = route.params;
     const [products, setProducts] = useState([]);
     const [keyword, setKeyword] = useState('');
 
@@ -25,16 +26,12 @@ function ItemListCategories ({category, setCategorySelected, setProductDetailId}
 
     return (
         <View style={styles.container}>
-            <Header title = {category} />
             <Search onSearch={setKeyword} />
             <FlatList
             data= {products}
-            renderItem={({item}) => <ProductItem product={item} setProductDetailId={setProductDetailId} />}
+            renderItem={({item}) => <ProductItem product={item} category={category} navigation={navigation} />}
             keyExtractor={(item) => item.id}
             />
-            <Pressable onPress = {() => setCategorySelected('')}>  
-                <Text style={styles.backButton}>Volver</Text>
-            </Pressable>
         </View>
     );
 }

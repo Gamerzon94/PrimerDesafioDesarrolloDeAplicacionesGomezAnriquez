@@ -6,25 +6,24 @@ import { colors } from '../../src/global/colors';
 import AnimatedLoader from 'react-native-animated-loader';
 import Swiper from 'react-native-swiper';
 
-const ItemDetail = ({productDetailId, category, setProductDetailId}) => {
+const ItemDetail = ({navigation, route}) => {
     const [product, setProduct] = useState({});
+
+    const {id} = route.params;
+
+    const {category} = route.params;
 
     const { width, height } = useWindowDimensions();
 
     useEffect(() => {
         const productFinded = allProducts.find(
-            (product) => product.id === productDetailId
+            (product) => product.id === id
         );
         setProduct(productFinded);
-    }, [productDetailId]);
-
-    const goBack = () => {
-        setProductDetailId(0);
-    }
+    }, [id]);
 
     return product ? (
         <View style={styles.container}>
-            <Header title = {category} />
             <View style={styles.producto}>
                 <Text style={styles.titulo}>{product.title}</Text>
                 {product.images && product.images[0] && (
@@ -36,9 +35,6 @@ const ItemDetail = ({productDetailId, category, setProductDetailId}) => {
                 <Text style={styles.textoDescriptivo}>Precio: ${product.price}</Text>
                 <Text style={styles.textoDescriptivo}>Stock: {product.stock}</Text>
             </View>
-            <Pressable onPress = {goBack}>  
-                <Text style={styles.backButton}>Volver</Text>
-            </Pressable>
         </View>
     ) : (
         <View>

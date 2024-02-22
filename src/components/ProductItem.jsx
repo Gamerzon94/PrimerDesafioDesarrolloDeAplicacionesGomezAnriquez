@@ -1,11 +1,11 @@
 import { Image, Pressable, StyleSheet, Text, View, useWindowDimensions } from "react-native";
 import Card from "./Card";
 
-const ProductItem = ({product, setProductDetailId}) => {
+const ProductItem = ({product, category, navigation}) => {
     const { width, height } = useWindowDimensions();
     return (
         <>
-            <Pressable onPress={() => setProductDetailId(product.id)}>
+            <Pressable onPress={() => navigation.navigate("ItemDetail", {id: product.id, category})}>
                 <Card style={{marginVertical : 5, marginLeft : 10, marginRight : 10, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
                     <Text style = {width < 400 ? styles.textMin : styles.text}>{product.title}</Text>
                     <Image style = {styles.image} source={{uri: product.images[0]}} />
