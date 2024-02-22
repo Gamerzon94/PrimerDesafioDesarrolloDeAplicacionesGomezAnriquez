@@ -7,9 +7,12 @@ import ItemListCategories from './src/screens/ItemListCategories';
 import { useState } from "react";
 import { useFonts } from 'expo-font';
 import { fonts } from "./src/global/fonts";
+import ItemDetail from './src/screens/ItemDetail';
 
 export default function App() {
   const [categorySelected, setCategorySelected] = useState('');
+
+  const [productDetailId, setProductDetailId] = useState(0);
 
   const [fontsLoaded] = useFonts(fonts);
 
@@ -21,8 +24,23 @@ export default function App() {
     <View style={styles.container}>
 
       <StatusBar style="auto" />
-      {categorySelected ? <ItemListCategories setCategorySelected={setCategorySelected} category={categorySelected}/> : 
-      <Home setCategorySelected = {setCategorySelected}/>}
+      {
+        productDetailId ? 
+        <ItemDetail 
+          category={categorySelected} 
+          productDetailId={productDetailId} 
+          setCategorySelected={setCategorySelected} 
+          setProductDetailId={setProductDetailId}
+        />
+        : 
+        categorySelected ?
+        <ItemListCategories 
+          setCategorySelected={setCategorySelected} 
+          category={categorySelected} 
+          setProductDetailId={setProductDetailId} />
+        :
+        <Home setCategorySelected={setCategorySelected} />
+      }
     </View>
   );
 }

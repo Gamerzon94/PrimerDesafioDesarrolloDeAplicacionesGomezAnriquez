@@ -1,4 +1,4 @@
-import { FlatList, StyleSheet , View, Text, Pressable } from "react-native";
+import { FlatList, StyleSheet , View, Text, Pressable, useWindowDimensions } from "react-native";
 import Header from "../components/Header";
 import allProducts from '../data/products.json';
 import ProductItem from "../components/ProductItem";
@@ -6,7 +6,7 @@ import Search from "../components/Search";
 import { useEffect, useState } from "react";
 import { colors } from '../../src/global/colors';
 
-function ItemListCategories ({category, setCategorySelected}) {
+function ItemListCategories ({category, setCategorySelected, setProductDetailId}) {
     const [products, setProducts] = useState([]);
     const [keyword, setKeyword] = useState('');
 
@@ -29,7 +29,7 @@ function ItemListCategories ({category, setCategorySelected}) {
             <Search onSearch={setKeyword} />
             <FlatList
             data= {products}
-            renderItem={({item}) => <ProductItem product={item} />}
+            renderItem={({item}) => <ProductItem product={item} setProductDetailId={setProductDetailId} />}
             keyExtractor={(item) => item.id}
             />
             <Pressable onPress = {() => setCategorySelected('')}>  
