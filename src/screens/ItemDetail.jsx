@@ -1,10 +1,12 @@
-import { StyleSheet, Text, View, Pressable, useWindowDimensions } from 'react-native'
+import { StyleSheet, Text, View, Pressable, useWindowDimensions, Image } from 'react-native'
 import {useEffect, useState} from 'react'
 import Header from "../components/Header";
 import allProducts from '../data/products.json';
 import { colors } from '../../src/global/colors';
+import AnimatedLoader from 'react-native-animated-loader';
+import Swiper from 'react-native-swiper';
 
-const ItemDetail = ({productDetailId, category, setCategorySelected, setProductDetailId}) => {
+const ItemDetail = ({productDetailId, category, setProductDetailId}) => {
     const [product, setProduct] = useState({});
 
     const { width, height } = useWindowDimensions();
@@ -21,9 +23,19 @@ const ItemDetail = ({productDetailId, category, setCategorySelected, setProductD
     }
 
     return product ? (
-        <View>
+        <View style={styles.container}>
             <Header title = {category} />
-            <Text>{product.title}</Text>
+            <View style={styles.producto}>
+                <Text style={styles.titulo}>{product.title}</Text>
+                {product.images && product.images[0] && (
+                    <Image style={styles.image} source={{ uri: product.images[0] }} />
+                )}
+                <Text style={styles.textoDescriptivo}>Marca: {product.brand}</Text>
+                <Text style={styles.textoDescriptivo}>Descripción: {product.description}</Text>
+                <Text style={styles.textoDescriptivo}>Descuento: {product.discountPercentage}%</Text>
+                <Text style={styles.textoDescriptivo}>Precio: ${product.price}</Text>
+                <Text style={styles.textoDescriptivo}>Stock: {product.stock}</Text>
+            </View>
             <Pressable onPress = {goBack}>  
                 <Text style={styles.backButton}>Volver</Text>
             </Pressable>
@@ -31,6 +43,13 @@ const ItemDetail = ({productDetailId, category, setCategorySelected, setProductD
     ) : (
         <View>
             <Header title = {category} />
+            <AnimatedLoader
+                visible={true}
+                overlayColor="rgba(255,255,255,0.75)"
+                source={require("../../assets/Animation.json")}
+                animationStyle={{width: 100, height: 100}}
+                speed={1}
+            />
             <Pressable onPress = {goBack}>  
                 <Text style={styles.backButton}>Volver</Text>
             </Pressable>
@@ -41,7 +60,33 @@ const ItemDetail = ({productDetailId, category, setCategorySelected, setProductD
 export default ItemDetail
 
 const styles = StyleSheet.create({
-    backButton: {
+    container: {
+        flex: 1,
+    },producto: {
+        flex: 1,
+        alignItems: 'center',
+        backgroundColor: colors.footer,
+        marginVertical: 10,
+        borderRadius: 10,
+        padding: 10,
+        alignSelf: 'center',
+        marginLeft: 10,
+        marginRight: 10,
+    },titulo: {
+        fontSize: 25,
+        fontFamily: 'HindBold',
+        marginTop: 10,
+    },textoDescriptivo:{
+        fontSize: 20,
+        fontFamily: 'HindRegular',
+        textAlign: 'center',
+    },image:{
+        width:200, 
+        height:200,
+        marginTop: 10,
+        marginBottom: 10,
+        borderRadius: 10,
+    },backButton: {
         fontSize: 20,
         fontFamily: 'HindRegular',
         textAlign: 'center',

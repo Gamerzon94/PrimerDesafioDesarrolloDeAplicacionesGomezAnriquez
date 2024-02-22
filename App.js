@@ -29,7 +29,6 @@ export default function App() {
         <ItemDetail 
           category={categorySelected} 
           productDetailId={productDetailId} 
-          setCategorySelected={setCategorySelected} 
           setProductDetailId={setProductDetailId}
         />
         : 
