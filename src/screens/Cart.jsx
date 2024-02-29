@@ -18,6 +18,7 @@ const Cart = () => {
             data={cartItems}
             renderItem={({ item }) => <CartItem item={item} />}
             keyExtractor={(cartItem) => cartItem.id}
+            contentContainerStyle={{paddingBottom: 320}}
         />
         <Text>Total: ${total}</Text>
         </View>

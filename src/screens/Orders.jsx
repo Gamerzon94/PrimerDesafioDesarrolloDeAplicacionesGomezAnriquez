@@ -10,6 +10,7 @@ const Orders = () => {
       data={orders}
       keyExtractor={(order) => order.id}
       renderItem={({ item }) => <OrderItem item={item} />}
+      contentContainerStyle={{paddingBottom: 320}}
       />
     </View>
   )
