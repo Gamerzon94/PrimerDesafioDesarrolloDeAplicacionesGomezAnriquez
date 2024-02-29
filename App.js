@@ -1,12 +1,8 @@
-import { useState } from "react";
 import { useFonts } from 'expo-font';
 import { fonts } from "./src/global/fonts";
-import Navigator from "./src/navigation/Navigator";
+import TabNavigator from "./src/navigation/TabNavigator";
 
 export default function App() {
-  const [categorySelected, setCategorySelected] = useState('');
-
-  const [productDetailId, setProductDetailId] = useState(0);
 
   const [fontsLoaded] = useFonts(fonts);
 
@@ -14,5 +10,5 @@ export default function App() {
     return null;
   }
 
-  return <Navigator />;
+  return <TabNavigator />;
 }
