@@ -9,8 +9,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { colors } from '../../src/global/colors';
 
-const Counter = () => {
-    const count = useSelector((state) => state.counterReducer.value);
+const Counter = ({ count, setCount }) => {
 
     const dispatch = useDispatch()
     return (
@@ -20,7 +19,10 @@ const Counter = () => {
                     <Text style={styles.buttonText}>-</Text>
                 </Pressable>
                 <Text style={styles.contador}>{count}</Text>
-                <Pressable onPress={()=> dispatch(increment())} style={styles.button}>
+                <Pressable onPress={() => {
+                    dispatch(increment());
+                    setCount(count + 1);
+                }} style={styles.button}>
                     <Text style={styles.buttonText}>+</Text>
                 </Pressable>
             </View>

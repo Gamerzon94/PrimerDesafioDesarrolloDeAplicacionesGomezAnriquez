@@ -1,5 +1,6 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Cart from "../screens/Cart";
+import CartComplete from "../screens/CartComplete";
 import Header from "../components/Header";
 
 const Stack = createNativeStackNavigator();
@@ -12,6 +13,9 @@ const CartStack = () => {
                 name="Cart"
                 component={Cart}
             />
+            <Stack.Screen
+                name="CartComplete"
+                component={CartComplete} />
         </Stack.Navigator>
     );
 }

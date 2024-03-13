@@ -1,7 +1,6 @@
 import { FlatList, View, StyleSheet } from "react-native";
 import CategoryItem from "./CategoryItem";
 import { colors } from '../global/colors';
-import Counter from "./Counter";
 import { useGetCategoriesQuery } from "../services/shopService";
 
 function Categories ({navigation}) {
@@ -10,7 +9,6 @@ function Categories ({navigation}) {
 
     return (
         <View style={styles.container}>
-            <Counter />
             <FlatList
             data = {data}
             renderItem = {({item}) => (<CategoryItem navigation={navigation} category = {item}/>)}

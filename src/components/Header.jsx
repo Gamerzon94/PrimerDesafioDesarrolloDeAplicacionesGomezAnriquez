@@ -9,7 +9,6 @@ function Header ({title}) {
         <View style={styles.header}>
             <Text style = {{fontSize : 20}}>{title}</Text>
             <Image source={jcjLogo} /> 
-            <Image style={{width: 50, height: 50}} source={cartLogo} /> 
         </View>
     );
 }

@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Pressable, useWindowDimensions, Image } from 'react-native'
+import { StyleSheet, Text, View, Pressable, useWindowDimensions, Image, ScrollView } from 'react-native'
 import {useEffect, useState} from 'react'
 import Header from "../components/Header";
 import allProducts from '../data/products.json';
@@ -7,9 +7,11 @@ import AnimatedLoader from 'react-native-animated-loader';
 import Swiper from 'react-native-swiper';
 import { useDispatch } from 'react-redux';
 import { addItem } from '../features/shop/cartSlice';
+import Counter from '../components/Counter';
 
 const ItemDetail = ({navigation, route}) => {
     const [product, setProduct] = useState({});
+    const [count, setCount] = useState(0);
 
     const {id} = route.params;
 
@@ -18,7 +20,8 @@ const ItemDetail = ({navigation, route}) => {
     const dispatch = useDispatch();
 
     const onAddCart = () => {
-        dispatch(addItem({...product, quantity: 1}))
+        dispatch(addItem({...product, quantity: count}));
+        navigation.navigate('CompleteProduct');
     }
 
     useEffect(() => {
@@ -27,22 +30,26 @@ const ItemDetail = ({navigation, route}) => {
     }, [id]);
 
     return product ? (
-        <View style={styles.container}>
-            <View style={styles.producto}>
-                <Text style={styles.titulo}>{product.title}</Text>
-                {product.images && product.images[0] && (
-                    <Image style={styles.image} source={{ uri: product.images[0] }} />
-                )}
-                <Text style={styles.textoDescriptivo}>Marca: {product.brand}</Text>
-                <Text style={styles.textoDescriptivo}>Descripción: {product.description}</Text>
-                <Text style={styles.textoDescriptivo}>Descuento: {product.discountPercentage}%</Text>
-                <Text style={styles.textoDescriptivo}>Precio: ${product.price}</Text>
-                <Text style={styles.textoDescriptivo}>Stock: {product.stock}</Text>
-                <Pressable onPress={onAddCart}>
-                    <Text style={styles.textoDescriptivo}>Agregar al carrito</Text>
-                </Pressable>
-            </View>
-        </View>
+        <>
+            <ScrollView style={styles.container}>
+                    <View style={styles.producto}>
+                        <Text style={styles.titulo}>{product.title}</Text>
+                        {product.images && product.images[0] && (
+                            <Image style={styles.image} source={{ uri: product.images[0] }} />
+                        )}
+                        <Text style={styles.textoDescriptivo}>Marca: {product.brand}</Text>
+                        <Text style={styles.textoDescriptivo}>Descripción: {product.description}</Text>
+                        <Text style={styles.textoDescriptivo}>Descuento: {product.discountPercentage}%</Text>
+                        <Text style={styles.textoDescriptivo}>Precio: ${product.price}</Text>
+                        <Text style={styles.textoDescriptivo}>Stock: {product.stock}</Text>
+                        <Counter count={count} setCount={(newCount) => setCount(newCount)} />
+                        <Pressable onPress={onAddCart}>
+                            <Text style={styles.textoDescriptivo}>Agregar al carrito</Text>
+                        </Pressable>
+                    </View>
+            </ScrollView>
+            <View style={{ height: 120 }} />
+        </>
     ) : (
         <View>
             <Header title = {category} />
@@ -65,6 +72,7 @@ export default ItemDetail
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        marginBottom: 10,
     },producto: {
         flex: 1,
         alignItems: 'center',

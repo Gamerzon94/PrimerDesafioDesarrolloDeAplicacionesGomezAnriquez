@@ -17,8 +17,10 @@ const CartItem = ({item}) => {
     <View style={styles.card} onPress={() => {}}>
         <View style={styles.textContainer}>
             <Text style={styles.text}>{item.title}</Text>
-            <Text style={styles.text2}>{item.brand}</Text>
-            <Text style={styles.text2}>{item.price}</Text>
+            <Text style={styles.text2}>Marca: {item.brand}</Text>
+            <Text style={styles.text2}>Categoria: {item.category}</Text>
+            <Text style={styles.text2}>Cantidad: {item.quantity}</Text>
+            <Text style={styles.text2}>Precio unitario: ${item.price}</Text>
         </View>
         <Pressable onPress={onRemoveCart}>
             <Entypo name="trash" size={30} color="black" />
@@ -32,7 +34,7 @@ export default CartItem
 const styles = StyleSheet.create({
     card:{
         felx: 1,
-        height: 100,
+        height: 150,
         backgroundColor: colors.card,
         padding: 10,
         borderWidth: 2,
