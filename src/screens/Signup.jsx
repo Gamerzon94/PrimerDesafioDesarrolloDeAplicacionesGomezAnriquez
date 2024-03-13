@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, Pressable } from "react-native";
 import React, { useEffect, useState } from "react";
 import InputForm from "../components/InputForm";
 import { useSignUpMutation } from "../services/authService";
@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux";
 import { setUser } from "../features/auth/authSlice";
 import { signupSchema } from "../validations/signupSchema";
 
-const Signup = () => {
+const Signup = ({navigation}) => {
   const [email, setEmail] = useState("");
   const [errorMail, setErrorMail] = useState("");
   const [password, setPassword] = useState("");
@@ -28,7 +28,7 @@ const Signup = () => {
       signupSchema.validateSync({ password, confirmPassword, email });
       triggerSignup({ email, password });
     } catch (err) {
-      console.log("path", err.path);
+      //console.log("path", err.path);
       switch (err.path) {
         case "email":
           setErrorMail(err.message);
@@ -47,7 +47,7 @@ const Signup = () => {
 
   useEffect(() => {
     if (result.data) {
-      dispatch(setUser(result));
+      dispatch(setUser(result.data));
     }
   }, [result]);
 
@@ -67,6 +67,9 @@ const Signup = () => {
         onChange={setConfirmPassword}
         isSecure={true}
       />
+      <Pressable onPress={() => navigation.navigate("Login")}>
+        <Text>Ir al login</Text>
+      </Pressable>
       <SubmitButton title={"Registro"} onPress={onSubmit} />
     </View>
   );

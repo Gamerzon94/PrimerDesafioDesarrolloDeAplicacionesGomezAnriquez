@@ -14,7 +14,7 @@ const MainNavigator = () => {
 
   useEffect(()=> {
     if(data) {
-      console.log(data.image);
+      //console.log(data.image);
       dispatch(setProfileImage(data.image))
     }
   }, [data])
