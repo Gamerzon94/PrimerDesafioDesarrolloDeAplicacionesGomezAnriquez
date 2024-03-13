@@ -4,8 +4,9 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import ShopStack from './ShopStack';
 import CartStack from "./CartStack";
 import OrdersStack from "./OrdersStack";
+import MyProfileStack from "./MyProfileStack";
 import { colors } from '../global/colors';
-import { Entypo, AntDesign, FontAwesome } from "@expo/vector-icons";
+import { Entypo, AntDesign, FontAwesome, Ionicons } from "@expo/vector-icons";
 
 const TabNavigator = () => {
     const Tab = createBottomTabNavigator();
@@ -60,6 +61,24 @@ const TabNavigator = () => {
                     );
                     },
                 }}
+                />
+                <Tab.Screen
+                    name="MyProfileStack"
+                    component={MyProfileStack}
+                    options={{
+                    tabBarIcon: ({ focused }) => {
+                        return (
+                        <View style={styles.tabContainer}>
+                            <Ionicons
+                            name="person-circle-outline"
+                            size={30}
+                            color={focused ? "black" : "grey"}
+                            />
+                            <Text style={{ color: focused ? "black" : "grey" }}>Mi Perfil</Text>
+                        </View>
+                        );
+                    },
+                    }}
                 />
             </Tab.Navigator>
     );
