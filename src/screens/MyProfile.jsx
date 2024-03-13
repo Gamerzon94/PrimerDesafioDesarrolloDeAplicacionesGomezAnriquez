@@ -1,5 +1,5 @@
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
-import React, { useState } from "react";
+import React from "react";
 import { colors } from "../global/colors";
 import { useSelector } from "react-redux";
 
@@ -28,6 +28,12 @@ const MyProfile = ({ navigation }) => {
         onPress={() => navigation.navigate("Image Selector")}
       >
         <Text style={styles.text}>Añadir una foto de perfil</Text>
+      </Pressable>
+      <Pressable
+        style={styles.button}
+        onPress={() => navigation.navigate("Location Selector")}
+      >
+        <Text style={styles.text}>Mi dirección</Text>
       </Pressable>
     </View>
   );
