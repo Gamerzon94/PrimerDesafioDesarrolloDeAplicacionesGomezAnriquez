@@ -5,20 +5,24 @@ import allProducts from '../data/products.json';
 import { colors } from '../../src/global/colors';
 import AnimatedLoader from 'react-native-animated-loader';
 import Swiper from 'react-native-swiper';
+import { useDispatch } from 'react-redux';
+import { addItem } from '../features/shop/cartSlice';
 
 const ItemDetail = ({navigation, route}) => {
     const [product, setProduct] = useState({});
 
     const {id} = route.params;
 
-    const {category} = route.params;
-
     const { width, height } = useWindowDimensions();
 
+    const dispatch = useDispatch();
+
+    const onAddCart = () => {
+        dispatch(addItem({...product, quantity: 1}))
+    }
+
     useEffect(() => {
-        const productFinded = allProducts.find(
-            (product) => product.id === id
-        );
+        const productFinded = allProducts.find((product) => product.id === id);
         setProduct(productFinded);
     }, [id]);
 
@@ -34,6 +38,9 @@ const ItemDetail = ({navigation, route}) => {
                 <Text style={styles.textoDescriptivo}>Descuento: {product.discountPercentage}%</Text>
                 <Text style={styles.textoDescriptivo}>Precio: ${product.price}</Text>
                 <Text style={styles.textoDescriptivo}>Stock: {product.stock}</Text>
+                <Pressable onPress={onAddCart}>
+                    <Text style={styles.textoDescriptivo}>Agregar al carrito</Text>
+                </Pressable>
             </View>
         </View>
     ) : (

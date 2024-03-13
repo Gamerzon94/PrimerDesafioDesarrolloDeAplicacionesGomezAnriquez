@@ -1,0 +1,1 @@
+export const base_url = "https://jcjenson-81c5c-default-rtdb.firebaseio.com/";

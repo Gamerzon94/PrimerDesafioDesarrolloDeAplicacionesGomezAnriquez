@@ -10,7 +10,6 @@ import { Entypo, AntDesign, FontAwesome } from "@expo/vector-icons";
 const TabNavigator = () => {
     const Tab = createBottomTabNavigator();
     return (
-        <NavigationContainer>
             <Tab.Navigator
             screenOptions={{
                 headerShown: false,
@@ -18,7 +17,7 @@ const TabNavigator = () => {
                 tabBarStyle: styles.tabBar
             }}
             >
-                <Tab.Screen name="ShopStack" component={ShopStack} 
+            <Tab.Screen name="ShopTab" component={ShopStack} 
                 options={{
                         tabBarIcon: ({ focused }) => {
                         return (
@@ -29,7 +28,7 @@ const TabNavigator = () => {
                         );
                         },
                     }}/>
-                <Tab.Screen name="CartStack" component={CartStack} 
+                <Tab.Screen name="CartSCartTabtack" component={CartStack} 
                 options={{
                     tabBarIcon: ({ focused }) => {
                     return (
@@ -63,7 +62,6 @@ const TabNavigator = () => {
                 }}
                 />
             </Tab.Navigator>
-        </NavigationContainer>
     );
 }
 
