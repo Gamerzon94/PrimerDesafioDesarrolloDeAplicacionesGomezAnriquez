@@ -27,7 +27,7 @@ Clone el repositorio y luego utilice Node para instalar
   npm run web
 ```
 ##  Sobre el proyecto
-Este es un e-commerce inspirado en la empresa ficticia [JCJenson](https://murder-drones.fandom.com/wiki/JCJenson) correspondiente al universo de la serie [Murder Drones](https://murder-drones.fandom.com/wiki/Murder_Drones_Wiki). Todos los productos que aparecen en esta aplicacion son actualmente productos disponibels en la tiend ade [Glitch Productions](https://glitchproductions.store/pages/murderdrones).
+Este es un e-commerce inspirado en la empresa ficticia [JCJenson](https://murder-drones.fandom.com/wiki/JCJenson) correspondiente al universo de la serie [Murder Drones](https://murder-drones.fandom.com/wiki/Murder_Drones_Wiki). Todos los productos que aparecen en esta aplicacion son actualmente productos disponibels en la tienda de [Glitch Productions](https://glitchproductions.store/pages/murderdrones).
 
 ## Alcance del proyecto
 Esta aplicación React Native tiene como objetivo proporcionar un E-commerce intuitivo para los usuarios en la busqueda de productos y compra de estos.
