@@ -55,7 +55,7 @@ const TabNavigator = () => {
                             size={30}
                             color={focused ? "black" : "grey"}
                         />
-                        <Text style={{ color: focused ? "black" : "grey" }}>Orders</Text>
+                        <Text style={{ color: focused ? "black" : "grey" }}>Ordenes</Text>
                         </View>
                     );
                     },

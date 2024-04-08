@@ -4,7 +4,7 @@ import { colors } from "../global/colors";
 import { useSelector } from "react-redux";
 
 const MyProfile = ({ navigation }) => {
-    const { profileImage, imageCamera } = useSelector((state) => state.authReducer.value);
+    const { profileImage, imageCamera, user, location } = useSelector((state) => state.authReducer.value);
 
   return (
     <View style={styles.container}>
@@ -22,6 +22,12 @@ const MyProfile = ({ navigation }) => {
             resizeMode="cover"
           />
         </>
+      )}
+      <Text style={styles.text}>Usuario: {user}</Text>
+      {location ? (
+        <Text style={styles.text}>Dirección: {location.address}</Text>
+      ) :(
+        <Text style={styles.text}>Dirección: Aun no registrada</Text>
       )}
       <Pressable
         style={styles.button}

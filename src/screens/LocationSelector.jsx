@@ -7,6 +7,7 @@ import { googleAPI } from "../firebase/googleAPI";
 import { useDispatch, useSelector } from "react-redux";
 import { setUserLocation } from "../features/auth/authSlice";
 import { usePostUserLocationMutation } from "../services/shopService";
+import { useNavigation } from '@react-navigation/native';
 
 const LocationSelector = () => {
   const [location, setLocation] = useState({ latitude: "", longitude: "" });
@@ -14,6 +15,7 @@ const LocationSelector = () => {
   const [address, setAddress] = useState(null);
   const { localId } = useSelector((state) => state.authReducer.value);
   const [triggerPostAddress, result] = usePostUserLocationMutation();
+  const navigation = useNavigation(); 
 
   const dispatch = useDispatch();
 
@@ -54,6 +56,7 @@ const LocationSelector = () => {
     dispatch(setUserLocation(locationFormatted));
 
     triggerPostAddress({localId, location: locationFormatted});
+    navigation.navigate("My Profile");
   };
 
   return (
