@@ -1,28 +1,32 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-import {
-    increment,
-    decrement,
-    incrementByAmount,
-    reset,
-  } from "../features/counter/counterSlice";
-import { useDispatch, useSelector } from "react-redux";
+import { increment, decrement } from "../features/counter/counterSlice";
+import { useDispatch } from "react-redux";
 import { colors } from '../../src/global/colors';
 
-const Counter = ({ count, setCount }) => {
+const Counter = ({ count, setCount, maxCount }) => {
 
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
+    const incrementCount = () => {
+        if (count < maxCount) {
+            setCount(count + 1);
+        }
+    };
+    
+    const decrementCount = () => {
+        if (count > 1) {
+            setCount(count - 1);
+        }
+    };
+
     return (
         <View style={styles.container}>
             <View style={styles.buttonsContainer}>
-                <Pressable  onPress={()=> dispatch(decrement())} style={styles.button}>
+                <Pressable  onPress={decrementCount} style={styles.button}>
                     <Text style={styles.buttonText}>-</Text>
                 </Pressable>
                 <Text style={styles.contador}>{count}</Text>
-                <Pressable onPress={() => {
-                    dispatch(increment());
-                    setCount(count + 1);
-                }} style={styles.button}>
+                <Pressable onPress={incrementCount} style={styles.button}>
                     <Text style={styles.buttonText}>+</Text>
                 </Pressable>
             </View>

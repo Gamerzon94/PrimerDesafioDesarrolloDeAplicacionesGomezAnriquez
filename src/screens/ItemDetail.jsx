@@ -1,21 +1,20 @@
-import { StyleSheet, Text, View, Pressable, useWindowDimensions, Image, ScrollView } from 'react-native'
+import { StyleSheet, Text, View, Pressable, Image, ScrollView } from 'react-native'
 import {useEffect, useState} from 'react'
 import Header from "../components/Header";
 import allProducts from '../data/products.json';
 import { colors } from '../../src/global/colors';
 import AnimatedLoader from 'react-native-animated-loader';
-import Swiper from 'react-native-swiper';
 import { useDispatch } from 'react-redux';
 import { addItem } from '../features/shop/cartSlice';
 import Counter from '../components/Counter';
+import StyledText from '../styledComponents/StyledText';
 
 const ItemDetail = ({navigation, route}) => {
     const [product, setProduct] = useState({});
-    const [count, setCount] = useState(0);
+    const [count, setCount] = useState(1);
+    const maxCount = product.stock;
 
     const {id} = route.params;
-
-    const { width, height } = useWindowDimensions();
 
     const dispatch = useDispatch();
 
@@ -42,7 +41,7 @@ const ItemDetail = ({navigation, route}) => {
                         <Text style={styles.textoDescriptivo}>Descuento: {product.discountPercentage}%</Text>
                         <Text style={styles.textoDescriptivo}>Precio: ${product.price}</Text>
                         <Text style={styles.textoDescriptivo}>Stock: {product.stock}</Text>
-                        <Counter count={count} setCount={(newCount) => setCount(newCount)} />
+                        <Counter count={count} setCount={(newCount) => setCount(newCount)} maxCount={maxCount} />
                         <Pressable onPress={onAddCart}>
                             <Text style={styles.textoDescriptivo}>Agregar al carrito</Text>
                         </Pressable>

@@ -8,7 +8,6 @@ import { init } from './src/db';
 init()
   .then(()=> console.log("base de datos inicializada"))
   .catch((err) => {
-    console.log("error")
     console.log(err);
   })
 

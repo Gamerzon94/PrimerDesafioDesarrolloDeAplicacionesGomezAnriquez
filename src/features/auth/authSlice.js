@@ -25,7 +25,7 @@ export const authSlice = createSlice({
               localId: action.payload.localId,
             };
         },
-        clearUser: (state) => (state.value = { user: null, token: null }),
+        clearUser: (state) => (state.value = { user: null, token: null, localId: null}),
         setCameraImage: (state, action) => {
             state.value = {
               ...state.value,

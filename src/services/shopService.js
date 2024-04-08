@@ -46,7 +46,10 @@ export const shopApi = createApi({
                 address: location.address
               },
             })
-          })
+          }),
+          getOrdersByUser: builder.query({
+            query: (localId) => `orders.json?orderBy="userId"&equalTo="${localId}"`,
+          }),
         }),
       });
       
@@ -58,5 +61,6 @@ export const shopApi = createApi({
         usePostProfileImageMutation,
         useGetUserLocationQuery,
         usePostUserLocationMutation,
+        useGetOrdersByUserQuery,
       } = shopApi;
       

@@ -22,7 +22,7 @@ function Header ({title}) {
             <Image source={jcjLogo} /> 
             {user && (
                 <Pressable style={styles.logoutIcon} onPress={onLogout}>
-                <MaterialIcons name="logout" size={24} color="white" />
+                <MaterialIcons name="logout" size={24} color="black" />
                 </Pressable>
             )}
         </View>
@@ -41,7 +41,6 @@ const styles = StyleSheet.create({
         paddingTop: Constants.statusBarHeight,
     },
     logoutIcon: {
-        position: "absolute",
         right: 20,
     },
 });
